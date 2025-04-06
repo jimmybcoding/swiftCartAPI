@@ -1,18 +1,18 @@
-#Swiftcart API
+# Swiftcart API
 A RESTful API for managing a shopping cart, built with Express and Sequelize. It allows users to browse products, add and remove items from their cart and complete purchases. The database management is powered by Neon DB.
 
-##Setup Instructions
+## Setup Instructions
 
-###1.Clone the repository
+### 1.Clone the repository
 
 git clone https://github.com/jimmybcoding/swiftCartAPI.git
 cd swiftCartAPI
 
-###2.Install the dependencies
+### 2.Install the dependencies
 
 npm install
 
-###3.Configure environmental variable
+### 3.Configure environmental variable
 
 Create a new Neon database: https://neon.tech
 Copy the connection string
@@ -20,19 +20,19 @@ Create a .env file in the project root and paste the connection string:
 
 DATABASE_URL=neon-connection-string-here
 
-###4.Run the migrations
+### 4.Run the migrations
 
 npx sequelize db:migrate
 
-###5.Run the seeder
+### 5.Run the seeder
 
 npx sequelize db:seed:all
 
-###6.Start the server
+### 6.Start the server
 
 nodemon index.js
 
-###API Testing
+### API Testing
 
 Open API_TEST.rest
 
