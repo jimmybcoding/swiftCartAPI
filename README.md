@@ -41,7 +41,7 @@ Open API_TEST.rest
 
 Send first GET request - List available products
 
-Copy one of the product_id values from the ressponse and change all occurances of product_id to this value
+Copy one of the product_id values from the response and change all occurances of product_id to this value
 
 Send first POST request - Create a shopping cart
 
