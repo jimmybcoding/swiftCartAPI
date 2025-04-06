@@ -1,0 +1,13 @@
+I was very excited to do this project, as I really want to start making my own modern fullstack personal projects. Setting up the .env and connecting properly without exposing sensitive details went smoothly, as I had done this a few times before.
+
+I started learning Sequelize with the Sequelize docs, but I didn’t love them. The Neon docs actually helped me more with Sequelize initially, before I got further along the learning curve. I opted to go the class route for my models just because I’m more familiar with JavaScript classes.
+
+I watched the Sequelize video in Module 9, but the instructor was defining associations in the Express file, using sync(), and not using migrations at all. I had already read about migrations, and I really want to make the most professional projects I can, so I went ahead with migrations. I got really comfortable with the Sequelize CLI during this time.
+
+Implementing the API endpoints wasn’t too bad, the hardest part was just knowing which Sequelize methods to use and how to use them. I decided to implement a single API endpoint for adding and changing quantities of products. I was almost going to lump delete functionality in here too, but when imagining the frontend, I pictured a user clicking a trash icon beside a cart item to fully delete it, as well as separate buttons to change quantity. So I split those actions into separate endpoints.
+
+The hardest part of the entire project for me was trying to list the shopping cart items. I knew I needed to JOIN the cart items table to the products table. I ended up reading about include() in the advanced associations docs. Implementing this was difficult. I kept getting an eager loading error saying that Product is not associated with CartItem. I couldn’t understand why, since I had checked the associations in the models so many times and couldn’t shake the error.
+
+I kept thinking the issue was case sensitivity. This is where following two sets of docs early on came back to bite me. I eventually realized I was re-initializing my models in index.js manually and overriding the correct associations that had been set up by models/index.js. When I changed this by importing the db object and implementing an alias in my eager loading, it finally worked.
+
+Now, I’m planning to build a frontend, connect it to have a fullstack app and expand on the features.

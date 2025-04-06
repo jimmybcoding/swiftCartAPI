@@ -1,0 +1,28 @@
+#### GET Request - List available products in the store
+GET http://localhost:3000/products
+
+
+#### POST Request - Create a shopping cart
+POST  http://localhost:3000/cart
+ 
+
+#### POST Request - Add a quantity of product_id  to the shopping cart
+POST http://localhost:3000/cart/cc2e1fd4-f494-4e6e-ac89-4e46b4948a23
+Content-Type: application/json
+ 
+{
+  "product_id": "e4a3971d-f195-468a-972b-a1942611cc77",
+  "quantity": 2
+}
+
+
+#### DELETE Request  - Delete item from the shopping cart
+DELETE http://localhost:3000/cart/cc2e1fd4-f494-4e6e-ac89-4e46b4948a23/e4a3971d-f195-468a-972b-a1942611cc77
+
+
+#### GET Request - List shopping cart items
+GET http://localhost:3000/cart/cc2e1fd4-f494-4e6e-ac89-4e46b4948a23
+
+
+#### POST Request - Checkout the shopping cart by creating an order
+POST http://localhost:3000/cart/cc2e1fd4-f494-4e6e-ac89-4e46b4948a23/checkout
