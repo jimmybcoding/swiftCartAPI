@@ -49,3 +49,22 @@ Copy the shoppingcart_id from the response and change all occurances of shopping
 
 Now all other endpoints should be functional
 
+## Docker Instructions
+
+After doing the above you can now:
+
+### 1.Build the Docker image using the Dockerfile
+
+docker build -t swiftcart-api .
+
+### 2.Start the app and PostgreSQL database using docker-compose.yml 
+
+docker-compose up 
+
+### 3. Access the app on localhost:3000
+
+Once the above steps are up and running, you can access the API at: http://localhost:3000
+
+To stop the Docker containers:
+
+docker-compose down
