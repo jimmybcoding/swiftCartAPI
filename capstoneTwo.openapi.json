@@ -1,0 +1,489 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "capstoneTwo",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [],
+  "paths": {
+    "/products": {
+      "get": {
+        "summary": "GET Products",
+        "deprecated": false,
+        "description": "Gets the product list. Need to copy and paste one of the uuids from this into other tests that require product_id.",
+        "tags": [],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "description": "product_id"
+                      },
+                      "name": {
+                        "type": "string",
+                        "description": "name"
+                      },
+                      "description": {
+                        "type": "string",
+                        "description": "description"
+                      },
+                      "price": {
+                        "type": "string",
+                        "description": "price"
+                      },
+                      "in_stock": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "description": "in stock amount"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "name",
+                      "description",
+                      "in_stock",
+                      "price"
+                    ]
+                  }
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/cart": {
+      "post": {
+        "summary": "POST Create Cart",
+        "deprecated": false,
+        "description": "Post request for user to create a cart, need the cart_id from the response to test other endpoints",
+        "tags": [],
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "success message for cart creation"
+                    },
+                    "shoppingcart_id": {
+                      "type": "string",
+                      "description": "shopping cart id needed for other endpoints"
+                    }
+                  },
+                  "required": [
+                    "message",
+                    "shoppingcart_id"
+                  ]
+                },
+                "example": {
+                  "message": "Shopping cart successfully created",
+                  "shoppingcart_id": "d7ffc1e4-4cad-4c2f-8a12-000c727ba78c"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/cart/36f559b5-3eec-4fc5-a22c-4f67f21e8edb": {
+      "get": {
+        "summary": "GET List Cart Items",
+        "deprecated": false,
+        "description": "User gets the list of cart items for the shoppingcart_id ",
+        "tags": [],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "description": "cartitem_id"
+                      },
+                      "shoppingcart_id": {
+                        "type": "string",
+                        "description": "shoppingcart_id"
+                      },
+                      "product_id": {
+                        "type": "string",
+                        "description": "product_id"
+                      },
+                      "quantity": {
+                        "type": "integer",
+                        "description": "quantity"
+                      },
+                      "product": {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string",
+                            "description": "name"
+                          },
+                          "description": {
+                            "type": "string",
+                            "description": "description"
+                          },
+                          "price": {
+                            "type": "string",
+                            "description": "price"
+                          },
+                          "in_stock": {
+                            "type": "integer",
+                            "description": "quantity in stock"
+                          }
+                        },
+                        "required": [
+                          "name",
+                          "description",
+                          "price",
+                          "in_stock"
+                        ],
+                        "description": "product added"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "shoppingcart_id",
+                      "product_id",
+                      "quantity",
+                      "product"
+                    ]
+                  }
+                },
+                "example": [
+                  {
+                    "id": "e6c85bbf-cf34-4b6c-8645-7fcbfae7ccf2",
+                    "shoppingcart_id": "57971e57-c863-4030-a37c-45201d9579a7",
+                    "product_id": "61a7ef20-7cb2-4da7-8072-1589f111e3e3",
+                    "quantity": 2,
+                    "product": {
+                      "name": "Sony TV",
+                      "description": "50 inch, 4K display",
+                      "price": "500.99",
+                      "in_stock": 10
+                    }
+                  }
+                ]
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      },
+      "post": {
+        "summary": "POST Add Cart Item",
+        "deprecated": false,
+        "description": "Add product to cart, modify quantity.",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "shoppingcart_id",
+            "in": "query",
+            "description": "shoppingcart_id",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "product_id": {
+                    "type": "string",
+                    "description": "product id"
+                  },
+                  "quantity": {
+                    "type": "integer",
+                    "description": "quantity"
+                  }
+                },
+                "required": [
+                  "product_id",
+                  "quantity"
+                ]
+              },
+              "example": {
+                "product_id": "61a7ef20-7cb2-4da7-8072-1589f111e3e3",
+                "quantity": 2
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "cartItem": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "shoppingcart_id": {
+                          "type": "string"
+                        },
+                        "product_id": {
+                          "type": "string"
+                        },
+                        "quantity": {
+                          "type": "integer"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "shoppingcart_id",
+                        "product_id",
+                        "quantity"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "message",
+                    "cartItem"
+                  ]
+                },
+                "example": {
+                  "message": "Item added to shopping cart",
+                  "cartItem": {
+                    "id": "e6c85bbf-cf34-4b6c-8645-7fcbfae7ccf2",
+                    "shoppingcart_id": "57971e57-c863-4030-a37c-45201d9579a7",
+                    "product_id": "61a7ef20-7cb2-4da7-8072-1589f111e3e3",
+                    "quantity": 4
+                  }
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/cart/36f559b5-3eec-4fc5-a22c-4f67f21e8edb/61a7ef20-7cb2-4da7-8072-1589f111e3e3": {
+      "delete": {
+        "summary": "DELETE Cart Item",
+        "deprecated": false,
+        "description": "User deletes item from the shopping cart.",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "shoppingcart_id",
+            "in": "query",
+            "description": "shoppingcart_id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "product_id",
+            "in": "query",
+            "description": "product_id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "message"
+                  ]
+                },
+                "example": {
+                  "message": "Product: 61a7ef20-7cb2-4da7-8072-1589f111e3e3 deleted from cart"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/cart/36f559b5-3eec-4fc5-a22c-4f67f21e8edb/checkout": {
+      "post": {
+        "summary": "POST Create Order",
+        "deprecated": false,
+        "description": "User creates an order from the shoppingcart cart items",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "shoppingcart_id",
+            "in": "query",
+            "description": "shoppingcart_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "order_id": {
+                      "type": "string"
+                    },
+                    "total_price": {
+                      "type": "number"
+                    },
+                    "purchased_items": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "product_name": {
+                            "type": "string"
+                          },
+                          "quantity": {
+                            "type": "integer"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "message",
+                    "order_id",
+                    "total_price",
+                    "purchased_items"
+                  ]
+                },
+                "example": {
+                  "message": "Checkout successful!",
+                  "order_id": "ebc45099-b03f-4e84-935c-09e18eefe2fb",
+                  "total_price": 1001.98,
+                  "purchased_items": [
+                    {
+                      "product_name": "Sony TV",
+                      "quantity": 2
+                    }
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "400": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "generic invalid input, bad request error"
+          },
+          "message": {
+            "type": "string",
+            "description": "error message"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "404": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "error to cover the user attempting to request a resource that is not found"
+          },
+          "message": {
+            "type": "string",
+            "description": "error message "
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "500": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "catch server side errors"
+          },
+          "message": {
+            "type": "string",
+            "description": "error message"
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      }
+    },
+    "securitySchemes": {}
+  },
+  "servers": [],
+  "security": []
+}
