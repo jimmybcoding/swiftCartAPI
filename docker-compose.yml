@@ -1,10 +1,10 @@
-
+# Defining the swiftcart API web service
 services:
   web:
-    build: .
+    build: . # Tells docker compose to build image using current directory
     ports:
-      - "3000:3000"
+      - "3000:3000" # Make host and container run on port 3000
     env_file:
-      - .env
+      - .env # Includes the environment variable
     environment:
-      - DATABASE_URL=${DATABASE_URL}
+      - DATABASE_URL=${DATABASE_URL} # Sets environment variable
